@@ -111,3 +111,15 @@ echo '<br>';
 
 // bitwise operators (& | ^ ~ << >>) 
 // ill come back to this later if its needed
+
+
+// array operators (+ == != === !==)
+$x = ['a', 'b', 'c'];
+$y = ['d', 'e', 'f'];
+// only the keys from the first array are preserved
+// if the second array has the same key, it will be ignored
+$z = $x + $y; //  $z = ['a', 'b', 'c']
+// == and === will only return true if the arrays have the same key value pairs
+// if we use loose comparison ==, it will return true if the arrays have the same key value pairs
+// does not care about the order of the keys or data types
+print_r($z);
