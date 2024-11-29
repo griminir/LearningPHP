@@ -74,3 +74,61 @@ function expensiveFuntion(): int {
 echo getValue() . '<br>';
 echo getValue() . '<br>';
 echo getValue() . '<br>';
+
+// variable functions
+function fooVariableFunction(): void {
+    echo 'Hello from fooVariableFunction';
+}
+
+$functionName = 'fooVariableFunction';
+if(is_callable($functionName)) {
+    $functionName();
+}
+else {
+    echo 'Function does not exist';
+}
+
+// anonymous functions
+$lineBreak = '<br>';
+
+$fooAnon = function() use($lineBreak): void {
+    // use is a value not a reference, & can be used to make it a reference
+    $lineBreak = 'changed line break';
+    echo $lineBreak;
+    echo 'Hello from anonymous function';
+};
+echo $lineBreak;
+$fooAnon();
+
+// callback functions
+$array1 = [1, 2, 3, 4, 5];
+
+// this function can be passed as a variable or a named function as a string
+$array2 = array_map(function($value) {
+    return $value * 2;
+}, $array1);
+
+// try swapping it with these two options
+$variableFunction = function($value) {
+    return $value * 2;
+};
+
+function namedFunction($value) {
+    return $value * 2;
+}
+
+echo '<pre>';
+print_r($array1);
+print_r($array2);
+echo '</pre>';
+
+// arrow functions
+$number = 2;
+// arrow functions has access to the variables in the parent scope without using use
+// but its a a value not a reference
+$array3 = array_map(fn($value) => $value * ++$number, $array2);
+
+echo '<pre>';
+print_r($array3);
+echo $number; // unchanged even if we ++ it in the arrow function
+echo '</pre>';
