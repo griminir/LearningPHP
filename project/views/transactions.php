@@ -34,20 +34,41 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- YOUR CODE -->
+                <?php if(! empty($transactions)): ?>
+                    <?php foreach($transactions as $transaction): ?>
+                        <tr>
+                            <td><?= formateDate($transaction['date']) ?></td>
+                            <td><?= $transaction['checkNumber'] ?></td>
+                            <td><?= $transaction['description'] ?></td>
+                            <td>
+                                <?php if($transaction['amount'] < 0): ?>
+                                    <span style="color: red">
+                                        <?= formatCurrency($transaction['amount']) ?>
+                                    </span>
+                                <?php elseif($transaction['amount'] > 0): ?>
+                                    <span style="color: green">
+                                        <?= formatCurrency($transaction['amount']) ?>
+                                    </span>
+                                <?php else: ?>
+                                    <?= formatCurrency($transaction['amount']) ?>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php endif ?>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?= formatCurrency($totals['totalIncome'] ?? 0) ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?= formatCurrency($totals['totalExpense'] ?? 0) ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?= formatCurrency($totals['netTotal'] ?? 0) ?></td>
                 </tr>
             </tfoot>
         </table>
