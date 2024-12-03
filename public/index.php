@@ -28,3 +28,4 @@ declare(strict_types=1);
 // echo $z;
 
 echo 'hello world it works from localhost';
+var_dump($_SERVER['REQUEST_URI']);
