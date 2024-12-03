@@ -27,5 +27,42 @@ declare(strict_types=1);
 // set_error_handler('errorHandler', E_ALL);
 // echo $z;
 
-echo 'hello world it works from localhost';
-var_dump($_SERVER['REQUEST_URI']);
+echo 'hello world it works from localhost' . '<br>';
+
+// looking up for files in the current directory
+// $dir = scandir(__DIR__);
+// echo '<br>';
+// var_dump($dir);
+
+//mkdir('foo'); // creates a directory
+// rmdir('foo'); // removes the directory
+// just some file operations
+// if (file_exists('foo.txt')) {
+//     echo '<br>' . 'file exists';
+//     echo filesize('foo.txt');
+//     file_put_contents('foo.txt', 'Hello World');
+
+//     // filesize is cached so it will not show the updated size
+//     // https://www.php.net/manual/en/function.clearstatcache.php
+//     clearstatcache(); // clears the cache
+
+//     echo filesize('foo.txt');
+// } else {
+//     echo 'file does not exist';
+// }
+
+// https://www.php.net/manual/en/function.fopen.php
+// https://www.php.net/manual/en/ref.filesystem.php
+
+// error handeling for file
+if (! file_exists('foo.txt')) {
+    echo 'file not found';
+    return;
+}
+
+$file = fopen('foo.txt', 'r');
+
+while(($line = fgets($file)) !== false) {
+    echo $line . '<br>';
+}
+fclose($file);
